@@ -1,4 +1,4 @@
-package org.telegram.bot.interpreterbot.model;
+package org.telegram.bot.interpreterbot.model.internal;
 
 public enum BotStatus {
 

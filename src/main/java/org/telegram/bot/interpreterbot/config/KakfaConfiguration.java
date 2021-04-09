@@ -12,8 +12,8 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.*;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
-import org.telegram.bot.interpreterbot.model.MessageReceived;
-import org.telegram.bot.interpreterbot.model.MessageToSend;
+import org.telegram.bot.interpreterbot.model.kafka.MessageReceived;
+import org.telegram.bot.interpreterbot.model.kafka.MessageToSend;
 
 import java.util.HashMap;
 import java.util.Map;

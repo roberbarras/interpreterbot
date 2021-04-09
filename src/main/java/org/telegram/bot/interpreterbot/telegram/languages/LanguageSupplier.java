@@ -1,6 +1,6 @@
 package org.telegram.bot.interpreterbot.telegram.languages;
 
-import org.telegram.bot.interpreterbot.model.UserLanguage;
+import org.telegram.bot.interpreterbot.model.internal.UserLanguage;
 import org.telegram.bot.interpreterbot.telegram.languages.impl.EnglishText;
 import org.telegram.bot.interpreterbot.telegram.languages.impl.SpanishText;
 

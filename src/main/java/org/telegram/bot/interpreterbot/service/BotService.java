@@ -1,6 +1,6 @@
 package org.telegram.bot.interpreterbot.service;
 
-import org.telegram.bot.interpreterbot.model.MessageReceived;
+import org.telegram.bot.interpreterbot.model.kafka.MessageReceived;
 
 public interface BotService {
 

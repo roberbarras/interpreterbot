@@ -12,7 +12,7 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.telegram.bot.interpreterbot.model.entity.Client;
 import org.telegram.bot.interpreterbot.model.entity.Garment;
-import org.telegram.bot.interpreterbot.model.TemporaryInfo;
+import org.telegram.bot.interpreterbot.model.internal.TemporaryInfo;
 
 import java.util.List;
 

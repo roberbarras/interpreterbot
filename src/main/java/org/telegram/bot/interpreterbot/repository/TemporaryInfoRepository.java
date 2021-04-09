@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
-import org.telegram.bot.interpreterbot.model.BotStatus;
+import org.telegram.bot.interpreterbot.model.internal.BotStatus;
 import org.telegram.bot.interpreterbot.model.entity.Garment;
-import org.telegram.bot.interpreterbot.model.TemporaryInfo;
+import org.telegram.bot.interpreterbot.model.internal.TemporaryInfo;
 
 import java.util.Optional;
 

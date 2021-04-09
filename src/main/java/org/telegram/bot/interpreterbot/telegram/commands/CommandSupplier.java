@@ -3,7 +3,7 @@ package org.telegram.bot.interpreterbot.telegram.commands;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.bot.interpreterbot.util.Constants;
-import org.telegram.bot.interpreterbot.model.BotStatus;
+import org.telegram.bot.interpreterbot.model.internal.BotStatus;
 import org.telegram.bot.interpreterbot.telegram.commands.impl.*;
 
 import javax.annotation.PostConstruct;

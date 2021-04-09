@@ -1,14 +1,12 @@
 package org.telegram.bot.interpreterbot.telegram.commands.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.telegram.bot.interpreterbot.model.MessageToSend;
-import org.telegram.bot.interpreterbot.model.UserLanguage;
+import org.telegram.bot.interpreterbot.model.kafka.MessageToSend;
+import org.telegram.bot.interpreterbot.model.internal.UserLanguage;
 import org.telegram.bot.interpreterbot.service.GarmentService;
 import org.telegram.bot.interpreterbot.service.TemporaryInfoService;
 import org.telegram.bot.interpreterbot.telegram.languages.Language;
 import org.telegram.bot.interpreterbot.telegram.languages.LanguageSupplier;
-
-import java.time.LocalDateTime;
 
 public abstract class BaseCommand {
 

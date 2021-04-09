@@ -2,8 +2,11 @@ package org.telegram.bot.interpreterbot.telegram.commands.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.telegram.bot.interpreterbot.model.*;
 import org.telegram.bot.interpreterbot.model.entity.Client;
+import org.telegram.bot.interpreterbot.model.internal.TemporaryInfo;
+import org.telegram.bot.interpreterbot.model.internal.UserLanguage;
+import org.telegram.bot.interpreterbot.model.kafka.MessageReceived;
+import org.telegram.bot.interpreterbot.model.kafka.MessageToSend;
 import org.telegram.bot.interpreterbot.service.ClientService;
 import org.telegram.bot.interpreterbot.telegram.commands.Command;
 

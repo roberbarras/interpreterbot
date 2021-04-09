@@ -1,7 +1,7 @@
 package org.telegram.bot.interpreterbot.model.entity;
 
 import lombok.*;
-import org.telegram.bot.interpreterbot.model.UserLanguage;
+import org.telegram.bot.interpreterbot.model.internal.UserLanguage;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

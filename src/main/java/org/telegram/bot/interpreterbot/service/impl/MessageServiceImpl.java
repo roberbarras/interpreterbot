@@ -2,8 +2,8 @@ package org.telegram.bot.interpreterbot.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.telegram.bot.interpreterbot.model.MessageReceived;
-import org.telegram.bot.interpreterbot.model.MessageToSend;
+import org.telegram.bot.interpreterbot.model.kafka.MessageReceived;
+import org.telegram.bot.interpreterbot.model.kafka.MessageToSend;
 import org.telegram.bot.interpreterbot.model.entity.MessageReceivedEntity;
 import org.telegram.bot.interpreterbot.model.entity.MessageToSendEntity;
 import org.telegram.bot.interpreterbot.repository.MessageReceivedRepository;

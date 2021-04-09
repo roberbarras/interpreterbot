@@ -1,12 +1,8 @@
-package org.telegram.bot.interpreterbot.model;
+package org.telegram.bot.interpreterbot.model.kafka;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Builder
 @NoArgsConstructor

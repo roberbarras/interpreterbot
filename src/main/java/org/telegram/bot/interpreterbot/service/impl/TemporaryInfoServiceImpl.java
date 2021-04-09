@@ -2,9 +2,9 @@ package org.telegram.bot.interpreterbot.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.telegram.bot.interpreterbot.model.BotStatus;
+import org.telegram.bot.interpreterbot.model.internal.BotStatus;
 import org.telegram.bot.interpreterbot.model.entity.Garment;
-import org.telegram.bot.interpreterbot.model.TemporaryInfo;
+import org.telegram.bot.interpreterbot.model.internal.TemporaryInfo;
 import org.telegram.bot.interpreterbot.repository.TemporaryInfoRepository;
 import org.telegram.bot.interpreterbot.service.TemporaryInfoService;
 
