@@ -1,8 +1,8 @@
 package org.telegram.bot.interpreterbot.service;
 
-import org.telegram.bot.interpreterbot.model.BotStatus;
+import org.telegram.bot.interpreterbot.model.internal.BotStatus;
 import org.telegram.bot.interpreterbot.model.entity.Garment;
-import org.telegram.bot.interpreterbot.model.TemporaryInfo;
+import org.telegram.bot.interpreterbot.model.internal.TemporaryInfo;
 
 public interface TemporaryInfoService {
 
