@@ -33,8 +33,7 @@ public class BotServiceImpl implements BotService {
     private MessageServiceImpl messageService;
 
     @Autowired
-    private KafkaTemplate<String, MessageToSend> customProducerMessage;
-
+    private KafkaTemplate<String, MessageToSend> messageToSendProducer;
 
     @Value("${cloudkarafka.topic.sendmessage}")
     private String sendMessageTopic;
@@ -81,7 +80,6 @@ public class BotServiceImpl implements BotService {
                     .text(Constants.ADMIN_ERROR_MESSAGE)
                     .chatId(adminChatId.toString()).build());
         }
-
     }
 
     private MessageToSend checkIfClientExists(Client client, MessageReceived messageReceived) {
@@ -145,7 +143,7 @@ public class BotServiceImpl implements BotService {
     }
 
     private void sendMessageToKafka(MessageToSend messageToSend) {
-        customProducerMessage.send(sendMessageTopic, messageToSend);
+        messageToSendProducer.send(sendMessageTopic, messageToSend);
         CompletableFuture.runAsync(() -> messageService.save(messageToSend));
     }
 }

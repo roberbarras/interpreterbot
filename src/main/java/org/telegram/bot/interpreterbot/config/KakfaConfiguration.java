@@ -12,6 +12,7 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.*;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
+import org.telegram.bot.interpreterbot.model.kafka.AvailableSizesRequest;
 import org.telegram.bot.interpreterbot.model.kafka.MessageReceived;
 import org.telegram.bot.interpreterbot.model.kafka.MessageToSend;
 
@@ -51,7 +52,7 @@ public class KakfaConfiguration {
         return factory;
     }
 
-    public ProducerFactory<String, MessageToSend> producerFactory() {
+    private <T> ProducerFactory<String, T> producerFactory(Class<T> messageType) {
         Map<String, Object> config = new HashMap<>();
 
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -65,8 +66,13 @@ public class KakfaConfiguration {
     }
 
     @Bean
-    public KafkaTemplate<String, MessageToSend> customProducerFactory() {
-        return new KafkaTemplate<>(producerFactory());
+    public KafkaTemplate<String, MessageToSend> messageToSendProducerFactory() {
+        return new KafkaTemplate<>(producerFactory(MessageToSend.class));
+    }
+
+    @Bean
+    public KafkaTemplate<String, AvailableSizesRequest> availableSizesRequestProducerFactory() {
+        return new KafkaTemplate<>(producerFactory(AvailableSizesRequest.class));
     }
 
 }

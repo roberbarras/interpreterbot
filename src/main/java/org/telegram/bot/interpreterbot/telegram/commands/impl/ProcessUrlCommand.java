@@ -1,9 +1,13 @@
 package org.telegram.bot.interpreterbot.telegram.commands.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 import org.telegram.bot.interpreterbot.model.entity.Client;
 import org.telegram.bot.interpreterbot.model.entity.Garment;
 import org.telegram.bot.interpreterbot.model.internal.BotStatus;
+import org.telegram.bot.interpreterbot.model.kafka.AvailableSizesRequest;
 import org.telegram.bot.interpreterbot.model.kafka.MessageReceived;
 import org.telegram.bot.interpreterbot.model.kafka.MessageToSend;
 import org.telegram.bot.interpreterbot.telegram.commands.Command;
@@ -19,6 +23,12 @@ import java.util.function.Function;
 
 @Component
 public class ProcessUrlCommand extends BaseCommand implements Command {
+
+    @Autowired
+    private KafkaTemplate<String, AvailableSizesRequest> availableSizesProducer;
+
+    @Value("${cloudkarafka.topic.sizesrequest}")
+    private String availableSizesRequestTopic;
 
     private Map<String, String> RARE_CHARACTERS;
 
@@ -54,6 +64,10 @@ public class ProcessUrlCommand extends BaseCommand implements Command {
                 .map(elem -> elem.substring(elem.lastIndexOf(Constants.HTTPS)))
                 .map(elem -> elem.replaceAll("\\?.*$", ""))
                 .ifPresentOrElse((elem) -> {
+                            availableSizesProducer.send(availableSizesRequestTopic, AvailableSizesRequest
+                                    .builder()
+                                    .url(elem)
+                                    .build());
                             String name = getNameFromUrl(elem);
                             message.setText(language.getRequestSizeMessage(name));
                             getTemporaryInfoService().updateStatusAndAddGarment(

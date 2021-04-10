@@ -1,11 +1,15 @@
 package org.telegram.bot.interpreterbot.model.kafka;
 
-import lombok.Builder;
-import lombok.ToString;
+import lombok.*;
+
+import java.io.Serializable;
 
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @ToString
-public class AvailableSizesRequest {
+public class AvailableSizesRequest implements Serializable {
 
-    String url;
+    private String url;
 }
