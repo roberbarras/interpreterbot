@@ -13,6 +13,7 @@ import org.springframework.kafka.core.*;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 import org.telegram.bot.interpreterbot.model.kafka.AvailableSizesRequest;
+import org.telegram.bot.interpreterbot.model.kafka.AvailableSizesResponse;
 import org.telegram.bot.interpreterbot.model.kafka.MessageReceived;
 import org.telegram.bot.interpreterbot.model.kafka.MessageToSend;
 
@@ -48,6 +49,15 @@ public class KakfaConfiguration {
         ConcurrentKafkaListenerContainerFactory<String, MessageReceived> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory(MessageReceived.class));
+        factory.setBatchListener(true);
+        return factory;
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, AvailableSizesResponse> availableSizesConsumerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, AvailableSizesResponse> factory =
+                new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory(AvailableSizesResponse.class));
         factory.setBatchListener(true);
         return factory;
     }

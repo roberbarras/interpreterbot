@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.telegram.bot.interpreterbot.model.entity.Client;
+import org.telegram.bot.interpreterbot.model.kafka.AvailableSizesResponse;
 import org.telegram.bot.interpreterbot.model.kafka.MessageReceived;
 import org.telegram.bot.interpreterbot.model.kafka.MessageToSend;
 import org.telegram.bot.interpreterbot.model.internal.UserLanguage;
@@ -15,9 +16,13 @@ import org.telegram.bot.interpreterbot.telegram.commands.CommandSupplier;
 import org.telegram.bot.interpreterbot.telegram.languages.LanguageSupplier;
 import org.telegram.bot.interpreterbot.util.Constants;
 
+import java.text.Normalizer;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -48,6 +53,36 @@ public class BotServiceImpl implements BotService {
                 .ifPresentOrElse((elem) -> adminMessageReceived(messageReceived),
                         () -> clientMessageReceived(messageReceived));
         CompletableFuture.runAsync(() -> messageService.save(messageReceived));
+    }
+
+    @Override
+    public void processAvailableSizes(AvailableSizesResponse availableSizesResponse) {
+        MessageToSend message = MessageToSend.builder().chatId(availableSizesResponse.getClientId())
+                .text(sizesMapToMessageText(availableSizesResponse.getSizes(),
+                        availableSizesResponse.getLanguage()))
+                .build();
+
+        sendMessageToKafka(message);
+    }
+
+    private String sizesMapToMessageText(Map<String, Boolean> sizes, UserLanguage language) {
+        StringBuilder text = new StringBuilder();
+        sizes.entrySet().stream()
+                .filter(elem -> !elem.getValue())
+                .map(elem -> text.append("/" + Normalizer
+                        .normalize(elem.getKey(), Normalizer.Form.NFD)
+                        .replaceAll("[^\\p{ASCII}]", "")
+                        .replace(" ", "_") + "\n"))
+                .collect(Collectors.toList());
+        sizes.entrySet().stream()
+                .filter(Map.Entry::getValue)
+                .map(elem -> text.append(Normalizer
+                        .normalize(elem.getKey(), Normalizer.Form.NFD)
+                        .replaceAll("[^\\p{ASCII}]", "") + " (" +
+                        LanguageSupplier.supplyLanguage(language).getAlreadyAvailableMessage()
+                        + ")\n"))
+                .collect(Collectors.toList());
+        return text.toString();
     }
 
     private void clientMessageReceived(MessageReceived messageReceived) {

@@ -1,6 +1,7 @@
 package org.telegram.bot.interpreterbot.model.kafka;
 
 import lombok.*;
+import org.telegram.bot.interpreterbot.model.internal.UserLanguage;
 
 import java.io.Serializable;
 
@@ -11,5 +12,8 @@ import java.io.Serializable;
 @ToString
 public class AvailableSizesRequest implements Serializable {
 
+    private String clientId;
+    private String chatId;
+    private UserLanguage language;
     private String url;
 }

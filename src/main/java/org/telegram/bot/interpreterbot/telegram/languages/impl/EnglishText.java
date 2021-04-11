@@ -94,4 +94,9 @@ public class EnglishText implements Language {
         return "I'm sorry. You no longer have permissions to use the bot";
     }
 
+    @Override
+    public String getAlreadyAvailableMessage() {
+        return "now available";
+    }
+
 }

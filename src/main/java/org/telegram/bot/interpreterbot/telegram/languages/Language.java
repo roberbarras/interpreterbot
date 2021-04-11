@@ -20,5 +20,6 @@ public interface Language {
     String getNotPermissionMessage();
     String getAllowedClientMessage();
     String getBannedClientMessage();
+    String getAlreadyAvailableMessage();
 
 }

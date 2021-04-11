@@ -66,6 +66,9 @@ public class ProcessUrlCommand extends BaseCommand implements Command {
                 .ifPresentOrElse((elem) -> {
                             availableSizesProducer.send(availableSizesRequestTopic, AvailableSizesRequest
                                     .builder()
+                                    .clientId(String.valueOf(messageReceived.getClientId()))
+                                    .chatId(String.valueOf(messageReceived.getChatId()))
+                                    .language(client.getUserLanguage())
                                     .url(elem)
                                     .build());
                             String name = getNameFromUrl(elem);

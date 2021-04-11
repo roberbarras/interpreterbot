@@ -17,7 +17,9 @@ public class ProcessSizeCommand extends BaseCommand implements Command {
 
         Garment garment = getTemporaryInfoService().findById(client.getClientId()).getNewGarment();
 
-        garment.setSize(messageReceived.getText());
+        garment.setSize(messageReceived.getText()
+                .replace("/", "")
+                .replace("_", " "));
 
         CompletableFuture.runAsync(() -> getGarmentService().save(garment));
 

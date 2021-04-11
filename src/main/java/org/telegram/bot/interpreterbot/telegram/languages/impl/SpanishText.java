@@ -94,4 +94,9 @@ public class SpanishText implements Language {
         return "Lo siento. Ya no tienes permisos para usar el bot";
     }
 
+    @Override
+    public String getAlreadyAvailableMessage() {
+        return "ya disponible";
+    }
+
 }
