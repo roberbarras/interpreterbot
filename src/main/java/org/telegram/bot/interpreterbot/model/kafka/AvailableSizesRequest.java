@@ -11,6 +11,5 @@ import java.io.Serializable;
 @ToString
 public class AvailableSizesRequest implements Serializable {
 
-    private String chatId;
     private String url;
 }

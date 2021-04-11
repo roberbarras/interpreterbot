@@ -67,7 +67,6 @@ public class ProcessUrlCommand extends BaseCommand implements Command {
                             availableSizesProducer.send(availableSizesRequestTopic, AvailableSizesRequest
                                     .builder()
                                     .url(elem)
-                                    .chatId(String.valueOf(messageReceived.getChatId()))
                                     .build());
                             String name = getNameFromUrl(elem);
                             message.setText(language.getRequestSizeMessage(name));
