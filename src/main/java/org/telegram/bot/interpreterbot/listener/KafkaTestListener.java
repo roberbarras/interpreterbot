@@ -12,7 +12,7 @@ public class KafkaTestListener {
     @Autowired
     private BotServiceImpl botService;
 
-    @KafkaListener(topics = "${cloudkarafka.topic.receivemessage}", containerFactory = "customConsumerFactory")
+    @KafkaListener(topics = "${cloudkarafka.topic.receivemessage}", containerFactory = "messageReceivedConsumerFactory")
     public void consumeJson(MessageReceived messageReceived) {
         botService.onUpdateReceived(messageReceived);
     }

@@ -22,8 +22,8 @@ import java.util.Map;
 @Configuration
 public class KakfaConfiguration {
 
-    public ConsumerFactory<String, MessageReceived> consumerFactory() {
-        JsonDeserializer<MessageReceived> deserializer = new JsonDeserializer<>(MessageReceived.class);
+    private <T> ConsumerFactory<String, T> consumerFactory(Class<T> messageType) {
+        JsonDeserializer<T> deserializer = new JsonDeserializer<>(messageType);
         deserializer.setRemoveTypeHeaders(false);
         deserializer.addTrustedPackages("*");
         deserializer.setUseTypeMapperForKey(true);
@@ -40,14 +40,14 @@ public class KakfaConfiguration {
         config.put(SaslConfigs.SASL_MECHANISM, "SCRAM-SHA-256");
         config.put(SaslConfigs.SASL_JAAS_CONFIG, "org.apache.kafka.common.security.scram.ScramLoginModule required username=\"vy6rnd8d\" password=\"jp0Q87pMW1Qiv9jyGNqrQt42X5uqRe9e\";");
 
-        return new DefaultKafkaConsumerFactory<>(config, new StringDeserializer(), deserializer);
+        return new DefaultKafkaConsumerFactory(config, new StringDeserializer(), deserializer);
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, MessageReceived> customConsumerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, MessageReceived> messageReceivedConsumerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, MessageReceived> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory());
+        factory.setConsumerFactory(consumerFactory(MessageReceived.class));
         factory.setBatchListener(true);
         return factory;
     }
