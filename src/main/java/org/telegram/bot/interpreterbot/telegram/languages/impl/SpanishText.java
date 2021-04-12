@@ -99,4 +99,9 @@ public class SpanishText implements Language {
         return "ya disponible";
     }
 
+    @Override
+    public String getAlertMessage(String name, String url, String size) {
+        return "La prenda <a href='" + url + "'>" + name + "</a> ya está disponible en la talla " + size;
+    }
+
 }

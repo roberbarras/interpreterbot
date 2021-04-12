@@ -99,4 +99,9 @@ public class EnglishText implements Language {
         return "now available";
     }
 
+    @Override
+    public String getAlertMessage(String name, String url, String size) {
+        return "Garment <a href='" + url + "'>" + name + "</a> is now available in size " + size;
+    }
+
 }

@@ -12,5 +12,6 @@ public final class Constants {
     public static final String OTHER_COMMAND = "/other";
     public static final String ALLOW_COMMAND = "allow";
     public static final String END_OF_URL = ".html";
+    public static final String PARSE_MODE_HTML = "html";
     public static final String ADMIN_ERROR_MESSAGE = "No he entendido lo que quieres decir";
 }

@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.telegram.bot.interpreterbot.model.entity.Client;
+import org.telegram.bot.interpreterbot.model.internal.UserLanguage;
 import org.telegram.bot.interpreterbot.model.kafka.AvailableSizesResponse;
+import org.telegram.bot.interpreterbot.model.kafka.GarmentAdvice;
 import org.telegram.bot.interpreterbot.model.kafka.MessageReceived;
 import org.telegram.bot.interpreterbot.model.kafka.MessageToSend;
-import org.telegram.bot.interpreterbot.model.internal.UserLanguage;
 import org.telegram.bot.interpreterbot.service.BotService;
 import org.telegram.bot.interpreterbot.telegram.commands.Command;
 import org.telegram.bot.interpreterbot.telegram.commands.CommandSupplier;
@@ -18,7 +19,6 @@ import org.telegram.bot.interpreterbot.util.Constants;
 
 import java.text.Normalizer;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -60,6 +60,20 @@ public class BotServiceImpl implements BotService {
         MessageToSend message = MessageToSend.builder().chatId(availableSizesResponse.getClientId())
                 .text(sizesMapToMessageText(availableSizesResponse.getSizes(),
                         availableSizesResponse.getLanguage()))
+                .build();
+
+        sendMessageToKafka(message);
+    }
+
+    @Override
+    public void processNewAlert(GarmentAdvice garment) {
+        Client client = clientService.findById(garment.getClientId());
+        MessageToSend message = MessageToSend.builder()
+                .text(LanguageSupplier.supplyLanguage(client.getUserLanguage())
+                        .getAlertMessage(garment.getName(), garment.getUrl(), garment.getSize()))
+                .disableWebPagePreview(false)
+                .parseMode(Constants.PARSE_MODE_HTML)
+                .chatId(String.valueOf(garment.getClientId()))
                 .build();
 
         sendMessageToKafka(message);
