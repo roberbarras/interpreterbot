@@ -48,10 +48,13 @@ public class BotServiceImpl implements BotService {
 
     @Override
     public void onUpdateReceived(MessageReceived messageReceived) {
-        Optional.of(messageReceived.getChatId())
-                .filter(elem -> elem.equals(adminChatId))
-                .ifPresentOrElse((elem) -> adminMessageReceived(messageReceived),
-                        () -> clientMessageReceived(messageReceived));
+        Optional.of(messageReceived)
+                .filter(mes -> mes.getText() != null)
+                .ifPresent(elem -> {
+                    Optional.of(elem.getChatId())
+                            .filter(chat -> chat.equals(adminChatId))
+                            .ifPresentOrElse((message) -> adminMessageReceived(messageReceived),
+                                    () -> clientMessageReceived(messageReceived));});
         CompletableFuture.runAsync(() -> messageService.save(messageReceived));
     }
 

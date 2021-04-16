@@ -3,6 +3,7 @@ package org.telegram.bot.interpreterbot.model.kafka;
 import lombok.*;
 import org.telegram.bot.interpreterbot.model.internal.UserLanguage;
 
+import java.io.Serializable;
 import java.util.Map;
 
 @Builder
@@ -10,7 +11,7 @@ import java.util.Map;
 @NoArgsConstructor
 @Getter
 @ToString
-public class AvailableSizesResponse {
+public class AvailableSizesResponse implements Serializable {
 
     private String clientId;
     private String chatId;
