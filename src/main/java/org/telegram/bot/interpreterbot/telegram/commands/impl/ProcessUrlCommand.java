@@ -27,7 +27,7 @@ public class ProcessUrlCommand extends BaseCommand implements Command {
     @Autowired
     private KafkaTemplate<String, AvailableSizesRequest> availableSizesProducer;
 
-    @Value("${cloudkarafka.topic.sizesrequest}")
+    @Value("${kafka.topic.sizesrequest}")
     private String availableSizesRequestTopic;
 
     private Map<String, String> RARE_CHARACTERS;

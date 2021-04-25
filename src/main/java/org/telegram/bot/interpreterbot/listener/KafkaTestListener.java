@@ -14,17 +14,17 @@ public class KafkaTestListener {
     @Autowired
     private BotServiceImpl botService;
 
-    @KafkaListener(topics = "${cloudkarafka.topic.receivemessage}", containerFactory = "messageReceivedConsumerFactory")
+    @KafkaListener(topics = "${kafka.topic.receivemessage}", containerFactory = "messageReceivedConsumerFactory")
     public void messageReceived(MessageReceived messageReceived) {
         botService.onUpdateReceived(messageReceived);
     }
 
-    @KafkaListener(topics = "${cloudkarafka.topic.sizesresponse}", containerFactory = "availableSizesConsumerFactory")
+    @KafkaListener(topics = "${kafka.topic.sizesresponse}", containerFactory = "availableSizesConsumerFactory")
     public void sizesReceived(AvailableSizesResponse availableSizesResponse) {
         botService.processAvailableSizes(availableSizesResponse);
     }
 
-    @KafkaListener(topics = "${cloudkarafka.topic.newalert}", containerFactory = "garmentConsumerFactory")
+    @KafkaListener(topics = "${kafka.topic.newalert}", containerFactory = "garmentConsumerFactory")
     public void newAlertReceived(GarmentAdvice garment) {
         botService.processNewAlert(garment);
     }

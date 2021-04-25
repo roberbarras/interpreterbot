@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public class ClientCacheRepository {
 
-    @Value("${redis.key.client}")
+    @Value("${spring.redis.key.client}")
     private String clientKey;
 
     private final RedisTemplate<Integer, Client> redisTemplate;

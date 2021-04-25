@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public class TemporaryInfoRepository {
 
-    @Value("${redis.key.cache}")
+    @Value("${spring.redis.key.cache}")
     private String infoKey;
 
     private final RedisTemplate<Integer, TemporaryInfo> redisTemplate;

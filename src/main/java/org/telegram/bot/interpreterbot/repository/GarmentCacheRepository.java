@@ -13,7 +13,7 @@ import java.util.Optional;
 @Repository
 public class GarmentCacheRepository {
 
-    @Value("${redis.key.garment}")
+    @Value("${spring.redis.key.garment}")
     private String garmentKey;
 
     private final RedisTemplate<Integer, List<Garment>> redisTemplate;

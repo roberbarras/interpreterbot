@@ -14,4 +14,7 @@ public final class Constants {
     public static final String END_OF_URL = ".html";
     public static final String PARSE_MODE_HTML = "html";
     public static final String ADMIN_ERROR_MESSAGE = "No he entendido lo que quieres decir";
+    public static final String KAFKA_OFFSET_CONFIG = "latest";
+    public static final String KAFKA_PROTOCOL = "SASL_SSL";
+    public static final String KAFKA_MECHANISM = "SCRAM-SHA-256";
 }

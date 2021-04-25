@@ -40,7 +40,7 @@ public class BotServiceImpl implements BotService {
     @Autowired
     private KafkaTemplate<String, MessageToSend> messageToSendProducer;
 
-    @Value("${cloudkarafka.topic.sendmessage}")
+    @Value("${kafka.topic.sendmessage}")
     private String sendMessageTopic;
 
     @Value("${bot.adminchatid}")

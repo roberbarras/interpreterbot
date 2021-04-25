@@ -1,0 +1,41 @@
+server:
+  port: ${PORT:8081}
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 3
+      maximum-pool-size: 5
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+    password: ${REDIS_PASSWORD}
+    key:
+      cache: 'info'
+      garment: 'garment'
+      client: 'client'
+bot:
+  adminchatid: ${ADMIN_CHATID}
+logging:
+  level:
+    root: off
+    org:
+      telegram:
+        bot: debug
+kafka:
+  consumer: ${KAFKA_CONSUMER}
+  server: ${KAFKA_SERVER}
+  jaas: ${KAFKA_JAAS_CONFIG}
+  topic:
+    sendmessage: '${KAFKA_USERNAME}-org.telegram.bot.sendmessage'
+    receivemessage: '${KAFKA_USERNAME}-org.telegram.bot.receivemessage'
+    sizesrequest: '${KAFKA_USERNAME}-org.telegram.bot.availablesizesrequest'
+    sizesresponse: '${KAFKA_USERNAME}-org.telegram.bot.availablesizesresponse'
+    newalert: '${KAFKA_USERNAME}-org.telegram.bot.newalert'
