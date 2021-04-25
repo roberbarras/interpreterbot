@@ -1,8 +1,7 @@
 package org.telegram.bot.interpreterbot.telegram.languages;
 
 import org.telegram.bot.interpreterbot.model.internal.UserLanguage;
-import org.telegram.bot.interpreterbot.telegram.languages.impl.EnglishText;
-import org.telegram.bot.interpreterbot.telegram.languages.impl.SpanishText;
+import org.telegram.bot.interpreterbot.telegram.languages.impl.*;
 
 import java.util.Map;
 import java.util.Optional;
@@ -15,7 +14,11 @@ public class LanguageSupplier {
     static {
         LANGUAGE_SUPPLIER = Map.of(
                 UserLanguage.ES, SpanishText::new,
-                UserLanguage.EN, EnglishText::new
+                UserLanguage.EN, EnglishText::new,
+                UserLanguage.CAT, CatalanText::new,
+                UserLanguage.EUS, BasqueText::new,
+                UserLanguage.GA, GalicianText::new,
+                UserLanguage.FR, FrenchText::new
         );
     }
 
