@@ -22,5 +22,5 @@ public interface Language {
     String getBannedClientMessage();
     String getAlreadyAvailableMessage();
     String getAlertMessage(String name, String url, String size);
-
+    String getCleanMessage();
 }

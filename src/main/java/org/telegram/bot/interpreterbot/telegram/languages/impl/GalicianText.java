@@ -103,4 +103,9 @@ public class GalicianText implements Language {
     public String getAlertMessage(String name, String url, String size) {
         return "A prenda <a href='" + url + "'>" + name + "</a> agora está dispoñible en tamaño " + size;
     }
+
+    @Override
+    public String getCleanMessage() {
+        return "Elimináronse as pezas inactivas";
+    }
 }

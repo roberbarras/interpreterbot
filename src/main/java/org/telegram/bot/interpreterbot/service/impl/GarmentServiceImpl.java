@@ -1,8 +1,6 @@
 package org.telegram.bot.interpreterbot.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.bot.interpreterbot.model.entity.Garment;
@@ -36,15 +34,43 @@ public class GarmentServiceImpl implements GarmentService {
         try {
             List<Garment> garmentsFromCache = cacheGarments.join();
             LocalDateTime l2 = LocalDateTime.now();
-            log.debug("Tiempo en leer prendas de REDIS: {} us", Duration.between(l1, l2).toNanos()/1000);
+            log.debug("Tiempo en leer prendas de REDIS: {} us", Duration.between(l1, l2).toNanos() / 1000);
             return garmentsFromCache;
         } catch (CompletionException e) {
             List<Garment> garmentsFromDDBB = bbddGarments.join();
             CompletableFuture.runAsync(() -> garmentCacheRepository.save(clientId, garmentsFromDDBB));
             LocalDateTime l2 = LocalDateTime.now();
-            log.debug("Tiempo en leer prendas de BBDD: {} us", Duration.between(l1, l2).toNanos()/1000);
+            log.debug("Tiempo en leer prendas de BBDD: {} us", Duration.between(l1, l2).toNanos() / 1000);
             return garmentsFromDDBB;
         }
+    }
+
+    @Override
+    public List<Garment> findDisabledByClientId(int clientId) {
+        LocalDateTime l1 = LocalDateTime.now();
+        CompletableFuture<List<Garment>> cacheGarments = CompletableFuture.supplyAsync(() ->
+                garmentCacheRepository.findDisabledById(clientId));
+        CompletableFuture<List<Garment>> bbddGarments = CompletableFuture.supplyAsync(() ->
+                garmentRepository.findByClientIdAndEnabledFalseOrderByCreationDateAsc(clientId));
+        try {
+            List<Garment> garmentsFromCache = cacheGarments.join();
+            LocalDateTime l2 = LocalDateTime.now();
+            log.debug("Tiempo en leer prendas de REDIS: {} us", Duration.between(l1, l2).toNanos() / 1000);
+            return garmentsFromCache;
+        } catch (CompletionException e) {
+            List<Garment> garmentsFromDDBB = bbddGarments.join();
+            CompletableFuture.runAsync(() -> garmentCacheRepository.save(clientId, garmentsFromDDBB));
+            LocalDateTime l2 = LocalDateTime.now();
+            log.debug("Tiempo en leer prendas de BBDD: {} us", Duration.between(l1, l2).toNanos() / 1000);
+            return garmentsFromDDBB;
+        }
+    }
+
+    @Override
+    public void deleteDisabled(int clientId) {
+        CompletableFuture.runAsync(() ->
+                garmentRepository.findByClientIdAndEnabledFalseOrderByCreationDateAsc(clientId)
+                        .forEach(garment -> deleteById(garment.getId())));
     }
 
     @Override

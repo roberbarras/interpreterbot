@@ -103,4 +103,9 @@ public class BasqueText implements Language {
     public String getAlertMessage(String name, String url, String size) {
         return "Jantzia <a href='" + url + "'>" + name + "</a> tamaina eskuragarri dago orain " + size;
     }
+
+    @Override
+    public String getCleanMessage() {
+        return "Jantzi inaktiboak kendu dira";
+    }
 }
