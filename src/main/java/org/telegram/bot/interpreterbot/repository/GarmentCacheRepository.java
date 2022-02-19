@@ -9,6 +9,7 @@ import org.telegram.bot.interpreterbot.model.entity.Garment;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Repository
 public class GarmentCacheRepository {
@@ -31,6 +32,14 @@ public class GarmentCacheRepository {
 
     public List<Garment> findById(Integer clientId) {
         return Optional.ofNullable((List<Garment>) hashOperations.get(garmentKey, clientId))
+                .orElseThrow(NoSuchElementException::new);
+    }
+
+    public List<Garment> findDisabledById(Integer clientId) {
+        return Optional.of(((List<Garment>) hashOperations.get(garmentKey, clientId))
+                .stream()
+                .filter(garment -> !garment.isEnabled())
+                .collect(Collectors.toList()))
                 .orElseThrow(NoSuchElementException::new);
     }
 

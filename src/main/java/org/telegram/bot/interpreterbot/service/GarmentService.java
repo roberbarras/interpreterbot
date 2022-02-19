@@ -8,6 +8,10 @@ public interface GarmentService {
 
     List<Garment> findByClientId(int clientId);
 
+    List<Garment> findDisabledByClientId(int clientId);
+
+    void deleteDisabled(int clientId);
+
     void deleteById(long garmentId);
 
     void save(Garment garment);

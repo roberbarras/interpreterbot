@@ -104,4 +104,9 @@ public class FrenchText implements Language {
         return "Le vêtement <a href='" + url + "'>" + name + "</a> est maintenant disponible dans la taille suivante " + size;
     }
 
+    @Override
+    public String getCleanMessage() {
+        return "Les vêtements inactifs ont été supprimés";
+    }
+
 }

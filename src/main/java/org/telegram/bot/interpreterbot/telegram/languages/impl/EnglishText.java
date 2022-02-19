@@ -104,4 +104,9 @@ public class EnglishText implements Language {
         return "Garment <a href='" + url + "'>" + name + "</a> is now available in size " + size;
     }
 
+    @Override
+    public String getCleanMessage() {
+        return "Disabled garments have been removed";
+    }
+
 }
