@@ -104,4 +104,9 @@ public class SpanishText implements Language {
         return "La prenda <a href='" + url + "'>" + name + "</a> ya está disponible en la talla " + size;
     }
 
+    @Override
+    public String getCleanMessage() {
+        return "Se han eliminado las prendas inactivas";
+    }
+
 }

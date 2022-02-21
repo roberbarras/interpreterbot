@@ -9,6 +9,7 @@ public final class Constants {
     public static final String DELETE_COMMAND = "/delete";
     public static final String LIST_COMMAND = "/list";
     public static final String LANGUAGE_COMMAND = "/language";
+    public static final String CLEAN_COMMAND = "/clean";
     public static final String OTHER_COMMAND = "/other";
     public static final String ALLOW_COMMAND = "allow";
     public static final String END_OF_URL = ".html";

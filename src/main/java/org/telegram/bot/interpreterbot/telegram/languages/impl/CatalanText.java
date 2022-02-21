@@ -103,4 +103,9 @@ public class CatalanText implements Language {
     public String getAlertMessage(String name, String url, String size) {
         return "La peça <a href='" + url + "'>" + name + "</a> ja està disponible a la talla " + size;
     }
+
+    @Override
+    public String getCleanMessage() {
+        return "S'han eliminat les peces inactives";
+    }
 }
