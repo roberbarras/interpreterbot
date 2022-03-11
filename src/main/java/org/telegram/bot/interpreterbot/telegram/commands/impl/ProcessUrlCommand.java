@@ -62,7 +62,7 @@ public class ProcessUrlCommand extends BaseCommand implements Command {
                 .filter(elem -> elem.contains(Constants.HTTPS))
                 .filter(elem -> elem.contains(Constants.URL))
                 .map(elem -> elem.substring(elem.lastIndexOf(Constants.HTTPS)))
-                .map(elem -> elem.replaceAll("\\?.*$", ""))
+                .map(elem -> elem.replaceAll("\\&.*$", ""))
                 .ifPresentOrElse((elem) -> {
                             availableSizesProducer.send(availableSizesRequestTopic, AvailableSizesRequest
                                     .builder()
