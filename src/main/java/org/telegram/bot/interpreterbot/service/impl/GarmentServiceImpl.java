@@ -25,7 +25,7 @@ public class GarmentServiceImpl implements GarmentService {
     GarmentCacheRepository garmentCacheRepository;
 
     @Override
-    public List<Garment> findByClientId(int clientId) {
+    public List<Garment> findByClientId(Long clientId) {
         LocalDateTime l1 = LocalDateTime.now();
         CompletableFuture<List<Garment>> cacheGarments = CompletableFuture.supplyAsync(() ->
                 garmentCacheRepository.findById(clientId));
@@ -46,7 +46,7 @@ public class GarmentServiceImpl implements GarmentService {
     }
 
     @Override
-    public List<Garment> findDisabledByClientId(int clientId) {
+    public List<Garment> findDisabledByClientId(Long clientId) {
         LocalDateTime l1 = LocalDateTime.now();
         CompletableFuture<List<Garment>> cacheGarments = CompletableFuture.supplyAsync(() ->
                 garmentCacheRepository.findDisabledById(clientId));
@@ -67,7 +67,7 @@ public class GarmentServiceImpl implements GarmentService {
     }
 
     @Override
-    public void deleteDisabled(int clientId) {
+    public void deleteDisabled(Long clientId) {
         CompletableFuture.runAsync(() ->
                 garmentRepository.findByClientIdAndEnabledFalseOrderByCreationDateAsc(clientId)
                         .forEach(garment -> deleteById(garment.getId())));
@@ -77,7 +77,7 @@ public class GarmentServiceImpl implements GarmentService {
     public void deleteById(long garmentId) {
         CompletableFuture
                 .runAsync(() -> {
-                            int clientId = garmentRepository.findById(garmentId).get().getClientId();
+                            Long clientId = garmentRepository.findById(garmentId).get().getClientId();
                             garmentRepository.deleteById(garmentId);
                             garmentCacheRepository.save(clientId, garmentRepository.findByClientIdAndEnabledTrueOrderByCreationDateAsc(clientId));
                             log.debug("Se termina de borrar la prenda {}", garmentId);

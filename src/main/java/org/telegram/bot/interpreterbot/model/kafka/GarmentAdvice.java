@@ -11,7 +11,7 @@ public class GarmentAdvice {
 
     private long id;
 
-    private int clientId;
+    private Long clientId;
 
     private String url;
 

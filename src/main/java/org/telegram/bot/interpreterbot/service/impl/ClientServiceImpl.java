@@ -31,7 +31,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client findById(int id) {
+    public Client findById(Long id) {
         LocalDateTime l1 = LocalDateTime.now();
         CompletableFuture<Client> cacheClient = CompletableFuture.supplyAsync(() -> clientCacheRepository.findById(id));
         CompletableFuture<Client> bbddClient = CompletableFuture.supplyAsync(() -> clientRepository.findById(id)
@@ -50,7 +50,7 @@ public class ClientServiceImpl implements ClientService {
         }
     }
 
-    public void clientPermission(int clientId, boolean allow) {
+    public void clientPermission(Long clientId, boolean allow) {
         Optional<Client> client = clientRepository.findById(clientId);
         client.ifPresent(cli -> {
             cli.setAuth(allow);

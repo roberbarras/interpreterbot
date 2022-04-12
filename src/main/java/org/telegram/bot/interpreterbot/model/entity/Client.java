@@ -19,7 +19,7 @@ public class Client implements Serializable {
 
     @Id
     @Column
-    private int clientId;
+    private Long clientId;
 
     @Column
     private LocalDateTime creationDate;

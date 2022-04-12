@@ -114,7 +114,7 @@ public class BotServiceImpl implements BotService {
         try {
             String[] message = messageReceived.getText().split("_");
             String command = message[0].replace("/", "");
-            int client = Integer.parseInt(message[1]);
+            Long client = Long.parseLong(message[1]);
 
             Optional.of((Constants.ALLOW_COMMAND).equals(command))
                     .filter(e -> e)
@@ -176,7 +176,7 @@ public class BotServiceImpl implements BotService {
                 .build();
     }
 
-    private MessageToSend allowedClientMessage(int clientId) {
+    private MessageToSend allowedClientMessage(Long clientId) {
         Client client = clientService.findById(clientId);
         return MessageToSend.builder()
                 .text(LanguageSupplier.supplyLanguage(client.getUserLanguage())
@@ -185,7 +185,7 @@ public class BotServiceImpl implements BotService {
                 .build();
     }
 
-    private MessageToSend bannedClientMessage(int clientId) {
+    private MessageToSend bannedClientMessage(Long clientId) {
         Client client = clientService.findById(clientId);
         return MessageToSend.builder()
                 .text(LanguageSupplier.supplyLanguage(client.getUserLanguage())

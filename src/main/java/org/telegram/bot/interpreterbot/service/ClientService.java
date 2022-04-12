@@ -6,5 +6,5 @@ public interface ClientService {
 
     void save(Client client);
 
-    Client findById(int id);
+    Client findById(Long id);
 }

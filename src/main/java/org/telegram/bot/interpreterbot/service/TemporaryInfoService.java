@@ -6,13 +6,13 @@ import org.telegram.bot.interpreterbot.model.internal.TemporaryInfo;
 
 public interface TemporaryInfoService {
 
-    void save(Integer clientId, TemporaryInfo temporaryInfo);
+    void save(Long clientId, TemporaryInfo temporaryInfo);
 
-    TemporaryInfo findById(Integer clientId);
+    TemporaryInfo findById(Long clientId);
 
-    void delete(Integer clientId);
+    void delete(Long clientId);
 
-    void updateStatus(Integer clientId, BotStatus botStatus);
+    void updateStatus(Long clientId, BotStatus botStatus);
 
-    void updateStatusAndAddGarment(Integer clientId, BotStatus botStatus, Garment garment);
+    void updateStatusAndAddGarment(Long clientId, BotStatus botStatus, Garment garment);
 }

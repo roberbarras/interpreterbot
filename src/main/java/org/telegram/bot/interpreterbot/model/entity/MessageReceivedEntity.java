@@ -19,7 +19,7 @@ public class MessageReceivedEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
-    private Integer clientId;
+    private Long clientId;
     @Column
     private String name;
     @Column

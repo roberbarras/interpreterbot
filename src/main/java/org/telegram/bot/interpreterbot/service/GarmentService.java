@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface GarmentService {
 
-    List<Garment> findByClientId(int clientId);
+    List<Garment> findByClientId(Long clientId);
 
-    List<Garment> findDisabledByClientId(int clientId);
+    List<Garment> findDisabledByClientId(Long clientId);
 
-    void deleteDisabled(int clientId);
+    void deleteDisabled(Long clientId);
 
     void deleteById(long garmentId);
 

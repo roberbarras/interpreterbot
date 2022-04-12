@@ -16,35 +16,35 @@ public class TemporaryInfoRepository {
     @Value("${spring.redis.key.cache}")
     private String infoKey;
 
-    private final RedisTemplate<Integer, TemporaryInfo> redisTemplate;
+    private final RedisTemplate<Long, TemporaryInfo> redisTemplate;
 
     private final HashOperations hashOperations;
 
-    public TemporaryInfoRepository(RedisTemplate<Integer, TemporaryInfo> redisTemplate) {
+    public TemporaryInfoRepository(RedisTemplate<Long, TemporaryInfo> redisTemplate) {
         this.redisTemplate = redisTemplate;
         hashOperations = redisTemplate.opsForHash();
     }
 
-    public void save(Integer clientId, TemporaryInfo temporaryInfo){
+    public void save(Long clientId, TemporaryInfo temporaryInfo){
         hashOperations.put(infoKey, clientId, temporaryInfo);
     }
 
-    public TemporaryInfo findById(Integer clientId){
+    public TemporaryInfo findById(Long clientId){
         return Optional.ofNullable((TemporaryInfo)hashOperations.get(infoKey, clientId))
                 .orElse(TemporaryInfo.builder().botStatus(BotStatus.WAITING_URL).build());
     }
 
-    public void delete(Integer clientId){
+    public void delete(Long clientId){
         hashOperations.delete(infoKey, clientId);
     }
 
-    public void updateStatus(Integer clientId, BotStatus botStatus){
+    public void updateStatus(Long clientId, BotStatus botStatus){
         TemporaryInfo temporaryInfo = findById(clientId);
         temporaryInfo.setBotStatus(botStatus);
         save(clientId, temporaryInfo);
     }
 
-    public void updateStatusAndAddGarment(Integer clientId, BotStatus botStatus, Garment garment){
+    public void updateStatusAndAddGarment(Long clientId, BotStatus botStatus, Garment garment){
         TemporaryInfo temporaryInfo = findById(clientId);
         temporaryInfo.setBotStatus(botStatus);
         temporaryInfo.setNewGarment(garment);

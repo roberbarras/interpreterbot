@@ -14,23 +14,23 @@ public class TemporaryInfoServiceImpl implements TemporaryInfoService {
     @Autowired
     TemporaryInfoRepository temporaryInfoRepository;
 
-    public void save(Integer clientId, TemporaryInfo temporaryInfo) {
+    public void save(Long clientId, TemporaryInfo temporaryInfo) {
         temporaryInfoRepository.save(clientId, temporaryInfo);
     }
 
-    public TemporaryInfo findById(Integer clientId) {
+    public TemporaryInfo findById(Long clientId) {
         return temporaryInfoRepository.findById(clientId);
     }
 
-    public void delete(Integer clientId) {
+    public void delete(Long clientId) {
         temporaryInfoRepository.delete(clientId);
     }
 
-    public void updateStatus(Integer clientId, BotStatus botStatus) {
+    public void updateStatus(Long clientId, BotStatus botStatus) {
         temporaryInfoRepository.updateStatus(clientId, botStatus);
     }
 
-    public void updateStatusAndAddGarment(Integer clientId, BotStatus botStatus, Garment garment) {
+    public void updateStatusAndAddGarment(Long clientId, BotStatus botStatus, Garment garment) {
         temporaryInfoRepository.updateStatusAndAddGarment(clientId, botStatus, garment);
     }
 }

@@ -26,16 +26,16 @@ public class GarmentCacheRepository {
         hashOperations = redisTemplate.opsForHash();
     }
 
-    public void save(Integer clientId, List<Garment> garmentList) {
+    public void save(Long clientId, List<Garment> garmentList) {
         hashOperations.put(garmentKey, clientId, garmentList);
     }
 
-    public List<Garment> findById(Integer clientId) {
+    public List<Garment> findById(Long clientId) {
         return Optional.ofNullable((List<Garment>) hashOperations.get(garmentKey, clientId))
                 .orElseThrow(NoSuchElementException::new);
     }
 
-    public List<Garment> findDisabledById(Integer clientId) {
+    public List<Garment> findDisabledById(Long clientId) {
         return Optional.of(((List<Garment>) hashOperations.get(garmentKey, clientId))
                 .stream()
                 .filter(garment -> !garment.isEnabled())

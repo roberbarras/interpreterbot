@@ -7,8 +7,8 @@ import org.telegram.bot.interpreterbot.model.entity.Client;
 import java.util.Optional;
 
 @Repository
-public interface ClientRepository extends JpaRepository<Client, Integer> {
+public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    Optional<Client> findByClientIdAndAuthTrue(int clientId);
+    Optional<Client> findByClientIdAndAuthTrue(Long clientId);
 
 }

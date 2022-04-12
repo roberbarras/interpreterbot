@@ -37,8 +37,8 @@ public class RedisConfiguration {
     }
 
     @Bean
-    public RedisTemplate<Integer, TemporaryInfo> redisTempTemplate() {
-        RedisTemplate<Integer, TemporaryInfo> redisTemplate = new RedisTemplate<>();
+    public RedisTemplate<Long, TemporaryInfo> redisTempTemplate() {
+        RedisTemplate<Long, TemporaryInfo> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(jedisConnectionFactory());
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
@@ -46,8 +46,8 @@ public class RedisConfiguration {
     }
 
     @Bean
-    public RedisTemplate<Integer, Client> redisClientTemplate() {
-        RedisTemplate<Integer, Client> redisTemplate = new RedisTemplate<>();
+    public RedisTemplate<Long, Client> redisClientTemplate() {
+        RedisTemplate<Long, Client> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(jedisConnectionFactory());
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());

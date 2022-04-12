@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface GarmentRepository extends JpaRepository<Garment, Long> {
 
-    List<Garment> findByClientIdAndEnabledTrueOrderByCreationDateAsc(int clientId);
+    List<Garment> findByClientIdAndEnabledTrueOrderByCreationDateAsc(Long clientId);
 
-    List<Garment> findByClientIdAndEnabledFalseOrderByCreationDateAsc(int clientId);
+    List<Garment> findByClientIdAndEnabledFalseOrderByCreationDateAsc(Long clientId);
 }
